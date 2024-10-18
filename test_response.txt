@@ -1,0 +1,115 @@
+Funcion: first
+Test: 0, Expected: 0
+Test: 1, Expected: 1
+Test: 01, Expected: 1
+
+Tests aprobados: 100.0% 
+
+
+Funcion: prefix
+Test: 1, Expected: 1
+Test: 01, Expected: 0
+Test: 010, Expected: 01
+
+Tests aprobados: 100.0% 
+
+
+Funcion: membership
+Test: 0, Expected: True
+Test: 1, Expected: True
+Test: 010, Expected: False
+
+Tests aprobados: 100.0% 
+
+
+Funcion: closure
+Test: {'q0': {'0': {'q1'}, 'ε': {'q0', 'q2'}, '1': {'q0'}}, 'q1': {'0': {'q1'}, '1': {'q0'}}}, Expected: {'q0', 'q2'}
+
+Tests aprobados: 100.0% 
+
+
+Funcion: accept
+Test: [{'q0': {'0': {'q1'}, '1': {'q0'}}, 'q1': {'0': {'q1'}, '1': {'q0'}}}, 000], Expected: True
+Test: [{'q0': {'0': {'q1'}, '1': {'q0'}}, 'q1': {'0': {'q1'}, '1': {'q0'}}}, 01], Expected: False
+Test: [{'q0': {'0': {'q0'}, '1': {'q0', 'q1'}}, 'q1': {'0': {'q0'}, '1': {'q1'}}}, 01], Expected: True
+Test: [{'q0': {'0': {'q0'}, '1': {'q0', 'q1'}}, 'q1': {'0': {'q0'}, '1': {'q1'}}}, 010], Expected: False
+
+Tests aprobados: 100.0% 
+
+
+Prueba de Empty
+Funcion: accept
+Test: [{}, 000], Expected: False
+Test: [{}, 01], Expected: False
+
+Tests aprobados: 100.0% 
+
+
+Prueba de Epsilon
+Funcion: accept
+Test: [{}, 000], Expected: False
+Test: [{}, ε], Expected: True
+
+Tests aprobados: 100.0% 
+
+
+Prueba de Symbol
+Funcion: accept
+Test: [{'q0': {'0': {'q1'}}}, 00], Expected: False
+Test: [{'q0': {'1': {'q1'}}}, 01], Expected: False
+Test: [{'q0': {'1': {'q1'}}}, 1], Expected: True
+
+Tests aprobados: 100.0% 
+
+
+Prueba de Union
+Funcion: accept
+Test: [{'q0_union': {'ε': {'q0_union', 'q0_e2', 'q0_e1'}}, 'q0_e1': {'0': {'q1_e1'}, '1': {'q0_e1'}}, 'q1_e1': {'0': {'q1_e1'}, '1': {'q0_e1'}}, 'q0_e2': {'0': {'q0_e2'}, '1': {'q1_e2', 'q0_e2'}}, 'q1_e2': {'0': {'q0_e2'}, '1': {'q1_e2'}}}, 00], Expected: True
+Test: [{'q0_union': {'ε': {'q0_union', 'q0_e2', 'q0_e1'}}, 'q0_e1': {'0': {'q1_e1'}, '1': {'q0_e1'}}, 'q1_e1': {'0': {'q1_e1'}, '1': {'q0_e1'}}, 'q0_e2': {'0': {'q0_e2'}, '1': {'q1_e2', 'q0_e2'}}, 'q1_e2': {'0': {'q0_e2'}, '1': {'q1_e2'}}}, 01], Expected: True
+Test: [{'q0_union': {'ε': {'q0_union', 'q0_e2', 'q0_e1'}}, 'q0_e1': {'0': {'q1_e1'}, '1': {'q0_e1'}}, 'q1_e1': {'0': {'q1_e1'}, '1': {'q0_e1'}}, 'q0_e2': {'0': {'q0_e2'}, '1': {'q1_e2', 'q0_e2'}}, 'q1_e2': {'0': {'q0_e2'}, '1': {'q1_e2'}}}, ε], Expected: False
+
+Tests aprobados: 100.0% 
+
+
+Prueba de Concat
+Funcion: accept
+Test: [{'q0_e1': {'0': {'q1_e1'}, '1': {'q0_e1'}}, 'q1_e1': {'0': {'q1_e1'}, '1': {'q0_e1'}, 'ε': {'q1_e1', 'q0_e2'}}, 'q0_e2': {'0': {'q0_e2'}, '1': {'q1_e2', 'q0_e2'}}, 'q1_e2': {'0': {'q0_e2'}, '1': {'q1_e2'}}}, 00], Expected: False
+Test: [{'q0_e1': {'0': {'q1_e1'}, '1': {'q0_e1'}}, 'q1_e1': {'0': {'q1_e1'}, '1': {'q0_e1'}, 'ε': {'q1_e1', 'q0_e2'}}, 'q0_e2': {'0': {'q0_e2'}, '1': {'q1_e2', 'q0_e2'}}, 'q1_e2': {'0': {'q0_e2'}, '1': {'q1_e2'}}}, 01], Expected: True
+Test: [{'q0_e1': {'0': {'q1_e1'}, '1': {'q0_e1'}}, 'q1_e1': {'0': {'q1_e1'}, '1': {'q0_e1'}, 'ε': {'q1_e1', 'q0_e2'}}, 'q0_e2': {'0': {'q0_e2'}, '1': {'q1_e2', 'q0_e2'}}, 'q1_e2': {'0': {'q0_e2'}, '1': {'q1_e2'}}}, ε], Expected: False
+
+Tests aprobados: 100.0% 
+
+
+Prueba de Kleene
+Funcion: accept
+Test: [{'q0_e': {'0': {'q1_e'}, '1': {'q3_e'}}, 'q1_e': {'0': {'q3_e'}, '1': {'q2_e'}}, 'q2_e': {'0': {'q3_e'}, '1': {'q3_e'}, 'ε': {'q2_e', 'q0_e'}}, 'q3_e': {'0': {'q3_e'}, '1': {'q3_e'}}}, 00], Expected: False
+Test: [{'q0_e': {'0': {'q1_e'}, '1': {'q3_e'}}, 'q1_e': {'0': {'q3_e'}, '1': {'q2_e'}}, 'q2_e': {'0': {'q3_e'}, '1': {'q3_e'}, 'ε': {'q2_e', 'q0_e'}}, 'q3_e': {'0': {'q3_e'}, '1': {'q3_e'}}}, 0101], Expected: True
+Test: [{'q0_e': {'0': {'q1_e'}, '1': {'q3_e'}}, 'q1_e': {'0': {'q3_e'}, '1': {'q2_e'}}, 'q2_e': {'0': {'q3_e'}, '1': {'q3_e'}, 'ε': {'q2_e', 'q0_e'}}, 'q3_e': {'0': {'q3_e'}, '1': {'q3_e'}}}, ε], Expected: True
+
+Tests aprobados: 100.0% 
+
+
+Prueba toEAFN
+Funcion: accept
+Test: [{'q0_e1': {'a': {'q1_e1'}}, 'q1_e1': {'ε': {'q1_e1', 'q0_e2'}}, 'q0_e2': {'b': {'q1_e2'}}}, ab], Expected: True
+Test: [{'q0_union': {'ε': {'q0_union', 'q0_e2', 'q0_e1'}}, 'q0_e1': {'a': {'q1_e1'}}, 'q0_e2': {'b': {'q1_e2'}}}, b], Expected: True
+Test: [{'q0_e': {'a': {'q1_e'}}, 'q1_e': {'ε': {'q1_e', 'q0_e'}}}, aa], Expected: True
+Test: [{'q0_e1_e': {'a': {'q1_e1_e'}}, 'q0_e2_e': {'b': {'q1_e2_e'}}, 'q0_union_e': {'ε': {'q0_e2_e', 'q0_union_e', 'q0_e1_e'}}, 'q1_e1_e': {'ε': {'q1_e1_e', 'q0_union_e'}}, 'q1_e2_e': {'ε': {'q1_e2_e', 'q0_union_e'}}}, bab], Expected: True
+Test: [{'q0_union': {'ε': {'q0_e1_e1', 'q0_union', 'q0_e2'}}, 'q0_e1_e1': {'a': {'q1_e1_e1'}}, 'q1_e1_e1': {'ε': {'q1_e1_e1', 'q0_e2_e1'}}, 'q0_e2_e1': {'b': {'q1_e2_e1'}}, 'q0_e2': {'a': {'q1_e2'}}}, a], Expected: True
+Test: [{'q0_union': {'ε': {'q0_e1_e1', 'q0_union_e2', 'q0_union'}}, 'q0_e1_e1': {'a': {'q1_e1_e1'}}, 'q1_e1_e1': {'ε': {'q1_e1_e1', 'q0_e2_e1'}}, 'q0_e2_e1': {'b': {'q1_e2_e1'}}, 'q0_e1_e2': {'a': {'q1_e1_e2'}}, 'q0_e2_e2': {'b': {'q1_e2_e2'}}, 'q0_union_e2': {'ε': {'q0_e2_e2', 'q0_union_e2', 'q0_e1_e2'}}}, a], Expected: True
+Test: [{'q0_union': {'ε': {'q0_e1_e1', 'q0_union_e2', 'q0_union'}}, 'q0_e1_e1': {'a': {'q1_e1_e1'}}, 'q1_e1_e1': {'ε': {'q1_e1_e1', 'q0_e2_e1'}}, 'q0_e2_e1': {'b': {'q1_e2_e1'}}, 'q0_e1_e2': {'a': {'q1_e1_e2'}}, 'q0_e2_e2': {'b': {'q1_e2_e2'}}, 'q0_union_e2': {'ε': {'q0_e2_e2', 'q0_union_e2', 'q0_e1_e2'}}}, ab], Expected: True
+Test: [{'q0_e1': {'a': {'q1_e1'}}, 'q1_e1': {'ε': {'q1_e1', 'q0_e2'}}, 'q0_e2': {'b': {'q1_e2'}}}, abb], Expected: False
+
+Tests aprobados: 100.0% 
+
+
+Funcion: verify
+Test: prueba@mail.com, Expected: True
+Test: prueba2@mail.com.mx, Expected: True
+Test: a@ab, Expected: False
+Test: @.a, Expected: False
+Test: a@, Expected: False
+
+Tests aprobados: 100.0% 
+
+
